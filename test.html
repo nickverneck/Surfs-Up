@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <!--Script to allow for map API-->
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTWh80QTc3jKs9DVP7Z6NsTEA8KqJkfgk">
+    </script>
     <title>Document</title>
 </head>
 
 <body>
-    <h1 id = "ip">Hello</h1>
-    <p id = "loc">My Coordinates</p>
-
+    <!--Button creates map-->
+    <button id = "location-btn">Click on me</button>
+    <!--div for the map and direction panel. Hooked into by CSS and JS-->
+    <div id="map" style="float:left;width:70%;height:100%"></div>
+    <div id="directionsPanel" style="float:right;width:30%;height:100%"></div>
 
 
 
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src ="./assets/js/keys.js"></script>
     <script src ="./assets/js/init.js"></script>
 
 </body>
