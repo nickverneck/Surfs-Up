@@ -95,8 +95,9 @@ $(document).ready(function() {
           if (status == 'OK') {
             directionsRenderer.setDirections(result);
           }
+          $("#map").removeClass("hide");
+          $("#directionsPanel").removeClass("hide");
         });
-    
     }  
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
