@@ -1,0 +1,77 @@
+:root {
+    --surf: #A3D6D1; 
+}
+
+html {
+    background: url(./images/pexels-mudassir-ali-1536431_1.jpg) center fixed;
+    background-size: cover;
+}
+
+header {
+    background-color: #FFEED2;
+}
+
+header h1 {
+    display: inline-block;
+    font-size: 60px;
+    padding-left: 40px;
+    justify-content: space-between;
+}
+
+#local-beach {
+    float: left;
+}
+
+.search-button {
+    float: right;
+    padding: 20px;
+    padding-top: 30px;
+}
+
+#searchBtn {
+    background-color: var(--surf);
+}
+
+#directionsBtn {
+    float: right;
+    background-color: #85D1AA;
+    font-size: 20px;
+    margin-right: 70px
+}
+
+.columns {
+    padding-top: 50px;
+}
+
+ /* .column {
+    float: left;
+    padding: 10px;
+    margin-top: 50px;
+
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+} */
+
+#last-searched {
+    width: 25%;
+    /* background-color: white; */
+}
+
+#mainText {
+    width: 50%;
+    background-color: var(--surf);
+    /* opacity: 0.5; */
+}
+
+.information {
+  margin-top: 100px;
+}
+
+#nearby {
+    width: 25%;
+    /* background-color: white; */
+} 
