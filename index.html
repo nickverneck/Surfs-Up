@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surf's Up</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -13,65 +16,56 @@
 
     <header>
         <h1>Surf's Up</h1>
-        <div class="search-button">
-            <input type="text" placeholder="Search for Local Beaches" name="search">
-            <button type="submit" id="searchBtn">Search</button>
+        <div class="search-button field has-addons">
+            <div class="control"><input type="text" class="input is-primary" placeholder="Search for Local Beaches"></div>
+            <div class="control"><button type="submit" class="button is-primary">Search</button>
+            </div>
         </div>
     </header>
 
     <main>
 
-        <aside class>
+        <aside class="box">
             <h2>Favorite Spots</h2>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
-            <p>Northshore</p>
+
         </aside>
         <div id="mainText">
-            <div>
-            <p id="local-beach">Local Beach</p>
-            <button id="directionsBtn">Get Directions</button>
+            <div class="beachInfoDiv">
+                <h1 class="title is-1">Local Beach</h1>
+                <button id='location-btn' class='button is-primary'>Get Directions</button>
+                
             </div>
-            <div class="information">
-                <h3>Wave Height: 2-3 FT</h3>
-                <h4>Wave Period: 9 secs</h4>
-                <h4>Wind Speed: 6 knots</h4>
-                <h4>Wind Direction: Offshore</h4>
-            </div>
-            <div class="time-wave">
-                <p>Text</p>
-                <p>Text</p>
-                <p>Text</p>
-                <p>Text</p>
-                <p>Text</p>
-            </div>
-            <div class="nickV">
-                <p>NickV says: surfs up</p>
-            </div>
+            <div class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                  <header class="modal-card-head">
+                    <p class="modal-card-title">Directions</p>
+                    <button class="delete close-modal" aria-label="close"></button>
+                  </header>
+                  <section class="modal-card-body">
+                    <div id="map"  ></div>
+  <div id="directionsPanel"  ></div>
+                  </section>
+                  <footer class="modal-card-foot">
+                    
+                    <button class="button close-modal">Cancel</button>
+                  </footer>
+                </div>
+              </div>
+           
         </div>
-        <aside>
-            <h2>Beaches Nearby</h2>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
-            <p>Coco Beach</p>
+        <aside class="nearbyDiv menu box">
+
         </aside>
 
     </main>
-    
+    <!--Needed scripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTWh80QTc3jKs9DVP7Z6NsTEA8KqJkfgk">
+    </script>
+    <script src="./assets/js/surf.js"></script>
+    <script src="./assets/js/init.js"></script>
 </body>
 
 </html>

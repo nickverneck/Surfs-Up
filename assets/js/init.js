@@ -4,7 +4,8 @@ $(document).ready(function() {
     var userLon;
     var userCity;
     var cityID;
-
+    var beachName;
+  
     // Gets the coordinates of the user's latitude, longitude, and city then stores them as variables.
     function getLocation() {
 
@@ -12,7 +13,7 @@ $(document).ready(function() {
 
         fetch(requestURL)
         .then(function(response) {
-            console.log(response);
+           
             return response.json();
         })
         .then(function (data) {
@@ -27,13 +28,15 @@ $(document).ready(function() {
 
             fetch(requestURL2)
             .then(function(response) {
-                console.log(response);
+                
                 return response.json();
             })
             .then(function (data2) {
                 console.log(data2);
-                cityID = data2.spot._id;
-                print();
+                closeID = data2.spot._id;
+                beachName= data2.spot.name;
+                 fetchReport(closeID);
+                fetchNearby(closeID);
             });
         });
     }
@@ -60,8 +63,15 @@ $(document).ready(function() {
     //     zoom: 12,
     // });
     // }
+// close modal with mapp
+$('.close-modal').on("click", function(){
+  $('.modal').removeClass("is-active");
 
-    $("#location-btn").on("click", initMap);
+});
+// 
+
+
+    $('.beachInfoDiv').on("click","#location-btn", initMap);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Creates a map centered on the user's location then draws a connecting line to the beach in question.
@@ -71,10 +81,12 @@ $(document).ready(function() {
     var endPoint;
 
     function initMap() {
+    
+      $('.modal').attr("class","modal is-active");
         directionsService = new google.maps.DirectionsService();
         directionsRenderer = new google.maps.DirectionsRenderer();
         userLoc = new google.maps.LatLng(userLat, userLon);
-        endPoint = new google.maps.LatLng(25.7617, 80.1918);
+        endPoint = new google.maps.LatLng(beachLat, beachLong);
         var mapOptions = {
           zoom: 12,
           center: userLoc
@@ -88,15 +100,14 @@ $(document).ready(function() {
       function calcRoute() {
         var request = {
           origin: userLoc,
-          destination: "Miami, FL",
+          destination: beachName,
           travelMode: 'DRIVING'
         };
         directionsService.route(request, function(result, status) {
           if (status == 'OK') {
             directionsRenderer.setDirections(result);
           }
-          $("#map").removeClass("hide");
-          $("#directionsPanel").removeClass("hide");
+         
         });
     }  
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
