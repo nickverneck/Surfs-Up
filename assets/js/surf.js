@@ -1,3 +1,4 @@
+
 // let's create a object where holds all the urls needed for the API calls
 const surfline = {
     url: "https://services.surfline.com",
@@ -11,7 +12,8 @@ const surfline = {
     closest: " https://services.surfline.com/kbyg/mapview/spot?" //needs lat & lon
 
 }
-
+var beachLat ;
+    var beachLong ;
 // lets create a function that will grab the Surf Report data from surfline
 function fetchReport(id) {
     fetch(surfline.report + id)
@@ -37,15 +39,16 @@ function renderReport(data) {
     var windSpeed = data.forecast.wind.speed+" Knots";
     var windDir = data.forecast.wind.direction;
     var beachName = data.spot.name;
-    var lat = data.spot.lat;
-    var long = data.spot.long;
-     var html = "<h1>"+beachName+"</h1>"+
-     "<h3>Wave Height: "+waveHeight+"</h3>"+
-     "<h3>Wind Speed: "+windSpeed+"</h3>"+
-     "<h3>Weather Temperature: "+weatherTemp+"</h3>"+
-     "<h3>Water Temperature: "+waterTemp+"</h3>"+
-     "<h2>Surf Condition: " + surfCond + " "+waveType+"</h2>";
-     $(".mainDiv").html(html);
+   beachLat = data.spot.lat;
+     beachLong = data.spot.long;
+     var html = "<h1 class='title is-1'>"+beachName+"</h1><button id='location-btn' class='button is-primary'>Get Directions</button>"+
+     '<button class="button is-warning" >Add to Favorites</button>'+
+     "<h3 class='title is-5'>Wave Height: "+waveHeight+"</h3>"+
+     "<h3 class='title is-5'>Wind Speed: "+windSpeed+"</h3>"+
+     "<h3 class='title is-5'>Weather Temperature: "+weatherTemp+"</h3>"+
+     "<h3 class='title is-5'>Water Temperature: "+waterTemp+"</h3>"+
+     "<h2 class='title is-4'>Surf Condition: " + surfCond + " "+waveType+"</h2>";
+     $(".beachInfoDiv").html(html);
     
 
 }
@@ -78,8 +81,12 @@ function renderNearby(api) {
     else {
         length = api.data.spots.length
     }
+    var h2El = document.createElement("h2")
+    $(h2El).text("Nearby Beaches");
+    $(h2El).attr("class","title is-4")
     var ulEl = document.createElement("Ul")
-    
+    $(ulEl).attr("class","menu-list")
+    console.log(h2El)
     for (i = 0; i < length; i++) {
         var spotName = api.data.spots[i].name;
         var liEl = document.createElement("li")
@@ -87,15 +94,16 @@ function renderNearby(api) {
         ulEl.append(liEl);
 
     }
-    $(".nearbyDiv").html(ulEl);
-
+    $(".nearbyDiv").html("");
+    $(".nearbyDiv").append(h2El);
+    $(".nearbyDiv").append(ulEl);
+    
 
 }
-fetchNearby("5842041f4e65fad6a7708872");
-fetchReport("5842041f4e65fad6a7708872");
-// 
+
+ 
 function fetchClosest(id) {
-    fetch(surfline.closest + id)
+    return fetch(surfline.closest + id)
         .then(function (response) {
             return response.json();
         })
