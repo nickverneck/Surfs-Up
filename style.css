@@ -1,5 +1,7 @@
 :root {
     --surf: #A3D6D1; 
+    /* adding 88 after hexcode is 50% transparent. if want more opac, go higher. */
+    --semiTransSurf: #A3D6D188;
 }
 
 html {
@@ -7,25 +9,32 @@ html {
     background-size: cover;
 }
 
+body {
+    margin: 0;
+    /* testing font for aesthetics */
+    font-family: sans-serif;
+}
+
 header {
     background-color: #FFEED2;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+    align-items: center;
 }
 
 header h1 {
     display: inline-block;
     font-size: 60px;
-    padding-left: 40px;
-    justify-content: space-between;
 }
 
 #local-beach {
-    float: left;
+    font-size: 50px;
+    margin: 0 50px 0 0;
 }
 
 .search-button {
-    float: right;
     padding: 20px;
-    padding-top: 30px;
 }
 
 #searchBtn {
@@ -33,7 +42,6 @@ header h1 {
 }
 
 #directionsBtn {
-    float: right;
     background-color: #85D1AA;
     font-size: 20px;
     margin-right: 70px
@@ -43,35 +51,67 @@ header h1 {
     padding-top: 50px;
 }
 
- /* .column {
-    float: left;
-    padding: 10px;
-    margin-top: 50px;
-
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-} */
-
-#last-searched {
-    width: 25%;
-    /* background-color: white; */
-}
-
 #mainText {
-    width: 50%;
-    background-color: var(--surf);
-    /* opacity: 0.5; */
+    background-color: var(--semiTransSurf);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* selects first div under main */
+#mainText div:first-of-type {
+    display: flex;
+    /* align might change based on text. try flex-start flex-end center baseline stretch  */
+    align-items: center;
+}
+
+main aside {
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 .information {
-  margin-top: 100px;
+  margin-top: 25px;
 }
 
-#nearby {
-    width: 25%;
-    /* background-color: white; */
-} 
+/* * any element inside information */
+.information * {
+    margin: 10px 0;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 22% 50% 22%;
+    margin-top: 50px;
+    justify-content: space-around;
+}
+
+.time-wave {
+    display: grid;
+    /* 1 fraction */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.time-wave p {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid silver;
+}
+
+.nickV {
+    margin: 20px 10px 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 25px;
+    text-align: center;
+    /* em is relative units */
+    font-size: 2.5em;
+}
+
+.nickV p {
+    margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+    main {display: block;}
+}
