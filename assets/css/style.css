@@ -1,0 +1,30 @@
+
+/*Style for the map and page */
+#map {
+    height: 100%;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+/*Puts the test button at the top of the page */
+#location-btn {
+    display:block;
+}
+
+/* Hide class and fade-in for the map */
+.hide {
+  display: none;
+}
+
+.fade-in {
+  animation: fadeIn ease 10s;
+}
+  
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
