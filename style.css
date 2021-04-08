@@ -98,6 +98,7 @@ main {
 }
 .menu-list li:hover{
     background-color: var(--surf);
+    cursor: pointer;
    
 }
 

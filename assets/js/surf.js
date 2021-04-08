@@ -40,7 +40,9 @@ function renderReport(data) {
     var windDir = data.forecast.wind.direction;
     var beachName = data.spot.name;
    beachLat = data.spot.lat;
-     beachLong = data.spot.long;
+     beachLong = data.spot.lon;
+     console.log(beachLat);
+     console.log(beachLong);
      var html = "<h1 class='title is-1'>"+beachName+"</h1><button id='location-btn' class='button is-primary'>Get Directions</button>"+
      '<button class="button is-warning" >Add to Favorites</button>'+
      "<h3 class='title is-5'>Wave Height: "+waveHeight+"</h3>"+
@@ -61,7 +63,7 @@ function renderReport(data) {
         })
         .then( function (api) {
           renderNearby(api);
-          
+          console.log(api);
         })
 };
 
@@ -89,8 +91,11 @@ function renderNearby(api) {
     console.log(h2El)
     for (i = 0; i < length; i++) {
         var spotName = api.data.spots[i].name;
+        var spotID = api.data.spots[i]._id;
         var liEl = document.createElement("li")
         $(liEl).text(spotName);
+        $(liEl).attr("id", spotID);
+        liEl.addEventListener("click", clickedBeach);
         ulEl.append(liEl);
 
     }
@@ -112,3 +117,35 @@ function fetchClosest(id) {
             return data;
         })
 }
+
+///////
+
+// Finds information for a nearby beach that is clicked and displays it in the middle of the page.
+// Clears previous directions.
+function clickedBeach() {
+    var spotID = this.id;
+    console.log(spotID);
+    document.getElementById("directionsPanel").innerHTML = "";
+    fetchReport(spotID);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+function searchBeach() {
+    var userQuery = document.getElementById("search-input");
+
+    fetch(surfline.searchUrl + userQuery.value)
+        .then( function (response) {
+            return  response.json();
+        })
+        .then( function (api) {
+            console.log(api);
+            var spotID = api[0].hits.hits[0]._id;
+            console.log(spotID);
+            fetchReport(spotID);
+            fetchNearby(spotID);
+        })
+}
+
+var searchButton = document.getElementById("search-button");
+searchButton.addEventListener("click", searchBeach);

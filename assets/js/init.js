@@ -5,6 +5,7 @@ $(document).ready(function() {
     var userCity;
     var cityID;
     var beachName;
+    var beachID;
   
     // Gets the coordinates of the user's latitude, longitude, and city then stores them as variables.
     function getLocation() {
@@ -33,10 +34,11 @@ $(document).ready(function() {
             })
             .then(function (data2) {
                 console.log(data2);
-                closeID = data2.spot._id;
+                beachID = data2.spot._id;
+                console.log(beachID);
                 beachName= data2.spot.name;
-                 fetchReport(closeID);
-                fetchNearby(closeID);
+                fetchReport(beachID);
+                fetchNearby(beachID);
             });
         });
     }
@@ -83,6 +85,7 @@ $('.close-modal').on("click", function(){
     function initMap() {
     
       $('.modal').attr("class","modal is-active");
+        document.getElementById("directionsPanel").innerHTML = "";
         directionsService = new google.maps.DirectionsService();
         directionsRenderer = new google.maps.DirectionsRenderer();
         userLoc = new google.maps.LatLng(userLat, userLon);
@@ -100,7 +103,7 @@ $('.close-modal').on("click", function(){
       function calcRoute() {
         var request = {
           origin: userLoc,
-          destination: beachName,
+          destination: endPoint,
           travelMode: 'DRIVING'
         };
         directionsService.route(request, function(result, status) {
