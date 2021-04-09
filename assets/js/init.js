@@ -120,9 +120,10 @@ $(document).ready(function () {
     $(h2El).attr("class", "title is-4")
     var ulEl = document.createElement("Ul")
     $(ulEl).attr("class", "menu-list")
-    console.log(typeof favoriteBeaches)
-
-   
+    
+    if (favoriteBeaches !== null) {
+      
+  
    
       for (i = 0; i < Object.keys(favoriteBeaches).length; i++) {
         var beachName = Object.keys(favoriteBeaches)[i];
@@ -134,6 +135,7 @@ $(document).ready(function () {
         ulEl.append(liEl);
       
     }
+  }
     $("#favoriteBox").html("");
     $("#favoriteBox").append(h2El);
     $("#favoriteBox").append(ulEl);
