@@ -9,6 +9,6 @@ Google maps is being used to gather the user's approximate location and, if need
 
 ## Future Features
 
-Our forthcoming features will be rolled out at a later date. Our users can expect to see upcoming features such as a 5 day forecast, SMS text to alert when the conditions are best to surf, the ability to plan surf trips, beach ratings and user recommendations (called *ASK KEVIN). This is our current plan and more features will be added as the site progresses. 
+Our forthcoming features will be rolled out at a later date. Our users can expect to see upcoming features such as a 5 day forecast, SMS text to alert when the conditions are best to surf, the ability to plan surf trips, beach ratings and user recommendations (called Kelp reviews). This is our current plan and more features will be added as the site progresses. 
 
 ## Visuals
