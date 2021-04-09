@@ -57,6 +57,7 @@ h1{
     background-color: var(--semiTransSurf);
     padding: 10px;
     border-radius: 10px;
+    margin-bottom: 30px;
 }
 .button{
     margin-bottom: 10px;
