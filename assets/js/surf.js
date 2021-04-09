@@ -13,7 +13,9 @@ const surfline = {
 
 }
 var beachLat ;
-    var beachLong ;
+var beachLong ;
+var beachName;
+var beachID;
 // lets create a function that will grab the Surf Report data from surfline
 function fetchReport(id) {
     fetch(surfline.report + id)
@@ -27,7 +29,6 @@ function fetchReport(id) {
 // this function will render the report values into the main page
 // 
 function renderReport(data) {
-   console.log(data)
     var currentTideT = data.forecast.tide.type;// low, normal or high tide
     var currentTideH = data.forecast.tide.height + ' FT';
     var waterTemp = data.forecast.waterTemp.min + '-' + data.forecast.waterTemp.max + ' F';
@@ -41,15 +42,14 @@ function renderReport(data) {
     var beachName = data.spot.name;
    beachLat = data.spot.lat;
      beachLong = data.spot.lon;
-     console.log(beachLat);
-     console.log(beachLong);
+  
      var html = "<h1 class='title is-1'>"+beachName+"</h1><button id='location-btn' class='button is-primary'>Get Directions</button>"+
-     '<button class="button is-warning" >Add to Favorites</button>'+
+     '<button class="button is-warning" id="favorites" >Add to Favorites</button>'+
      "<h3 class='title is-5'>Wave Height: "+waveHeight+"</h3>"+
      "<h3 class='title is-5'>Wind Speed: "+windSpeed+"</h3>"+
      "<h3 class='title is-5'>Weather Temperature: "+weatherTemp+"</h3>"+
      "<h3 class='title is-5'>Water Temperature: "+waterTemp+"</h3>"+
-     "<h2 class='title is-4'>Surf Condition: " + surfCond + " "+waveType+"</h2>";
+     "<h2 class='title is-4'>Surf Condition: "+waveType+"</h2>";
      $(".beachInfoDiv").html(html);
     
 
@@ -63,7 +63,7 @@ function renderReport(data) {
         })
         .then( function (api) {
           renderNearby(api);
-          console.log(api);
+          
         })
 };
 
@@ -88,7 +88,6 @@ function renderNearby(api) {
     $(h2El).attr("class","title is-4")
     var ulEl = document.createElement("Ul")
     $(ulEl).attr("class","menu-list")
-    console.log(h2El)
     for (i = 0; i < length; i++) {
         var spotName = api.data.spots[i].name;
         var spotID = api.data.spots[i]._id;
@@ -123,12 +122,32 @@ function fetchClosest(id) {
 // Finds information for a nearby beach that is clicked and displays it in the middle of the page.
 // Clears previous directions.
 function clickedBeach() {
-    var spotID = this.id;
-    console.log(spotID);
-    document.getElementById("directionsPanel").innerHTML = "";
-    fetchReport(spotID);
-}
+    beachID = this.id;
+    beachName = this.textContent;
 
+    document.getElementById("directionsPanel").innerHTML = "";
+    fetchReport(beachID);
+}
+  //sets name and id to favorites list  
+  function setFavorites() {
+    var favoriteBeaches = { [beachName]: beachID };
+    var localFavorite = JSON.parse(localStorage.getItem("favorites"));
+   
+        localFavorite = {...localFavorite , ...favoriteBeaches};
+      console.log(localFavorite)
+      localStorage.setItem("favorites", JSON.stringify(localFavorite));
+      var liEl = document.createElement("li");
+        $(liEl).text(beachName);
+        $(liEl).attr("id", beachID);
+        liEl.addEventListener("click", clickedBeach);
+        $('#favoriteBox').find(".menu-list").append(liEl);
+        
+  
+    
+   
+  }
+
+  $('.beachInfoDiv').on("click","#favorites", setFavorites);
 ////////////////////////////////////////////////////////////////////////////////////////
 
 function searchBeach() {
@@ -140,10 +159,11 @@ function searchBeach() {
         })
         .then( function (api) {
             console.log(api);
-            var spotID = api[0].hits.hits[0]._id;
-            console.log(spotID);
-            fetchReport(spotID);
-            fetchNearby(spotID);
+            beachID = api[0].hits.hits[0]._id;
+            beachName = api[0].hits.hits[0]._source.name;
+            
+            fetchReport(beachID);
+            fetchNearby(beachID);
         })
 }
 
